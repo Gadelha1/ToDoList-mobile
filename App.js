@@ -1,20 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, Button, FlatList, StyleSheet} from 'react-native'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+export default function App(){
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = () =>{
+    setTasks([...tasks,{key: Math.random().toString(), value:task}]);
+    setTask('');
+  }
+
+  return(
+    <View style={style.app}>
+      <Text style={style.title}>Lista de Tarefas</Text>
+      <TextInput style={style.input} placeholder='Adicionar Tarefa'
+        onChangeText={setTask}
+        value={task}
+      />
+      <Button title="Adicionar" onPress={addTask}></Button>
+      <FlatList
+        data={tasks}
+        renderItem={({item})=>(
+          <Text>{item.value}</Text>
+        )}
+      />
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
+const style = StyleSheet.create({
+  app:{
     flex: 1,
-    backgroundColor: '#fff',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#00755c',
   },
-});
+  title:{
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    margin: 20,
+  },
+  input:{
+    borderWidth: 2,
+    borderRadius: 5,
+    height: 30,
+    width: 300,
+    textAlign: 'center',
+    margin: 5
+  },
+})
