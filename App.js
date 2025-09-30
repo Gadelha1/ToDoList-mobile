@@ -22,12 +22,13 @@ export default function App(){
           onChangeText={setTask}
           value={task}
         />
-      </View>
 
       <Pressable style={style.btn}
         title="Adicionar" onPress={addTask}>
         <Text>Adicionar</Text>
       </Pressable>
+      </View>
+
       <View style={style.list}>
         <FlatList
           data={tasks}
@@ -75,6 +76,13 @@ const style = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 10,
+    backgroundColor: '#f0f8f7ff',
+    height: 300,
   },
   btn:{
     borderRadius: 5,
